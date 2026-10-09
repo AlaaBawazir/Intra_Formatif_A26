@@ -17,5 +17,17 @@ namespace Dessins.Controllers
         }
 
         // TODO: Il faut ajouter une nouvelle action pour dessiner la séquence mentionnée dans l'énoncé
+        [HttpGet]
+        public async Task<ActionResult> GetDrawing2()
+        {
+            var drawEvent = new List<DrawingEvent> { };
+            drawEvent.Add(new DrawCircle(1, 1));
+            drawEvent.Add(new Wait(3));
+            drawEvent.Add(new DrawSquare(0, 2));
+            drawEvent.Add(new DrawSquare(2, 2));
+            drawEvent.Add(new Wait(1));
+            drawEvent.Add(new DrawStar(1, 3, 20));
+            return Ok();
+        }
     }
 }
