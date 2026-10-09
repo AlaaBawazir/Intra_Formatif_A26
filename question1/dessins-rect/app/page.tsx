@@ -26,6 +26,9 @@ export default function Home() {
 
   async function afficherEvents1(){
     clearShapes();
+    let result = await axios.get('http://localhost:5269/api/Dessins/GetDrawing1');
+    console.log(result.data);
+    applyEvents(result.data)
     // TODO: Il faut appeler le serveur pour obtenir l'event retourné
   }
 
@@ -36,6 +39,14 @@ export default function Home() {
 
   async function applyEvents(event:any){
     // TODO: Il faut traiter les événements reçus du serveur et dessiner les formes correspondantes
+    console.log("Applying event " + event.type)
+
+    switch(event.type){
+      case "Square" : {
+        await wait(1);    
+        drawSquare(event.x, event.y);
+      }
+    }
   }
 
   // ATTENTION: Les méthodes suivantes n'ont pas besoin d'être modifiées pour répondre à la question
