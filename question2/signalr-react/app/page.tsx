@@ -34,6 +34,10 @@ export default function Home() {
       setPizzaPrice(price);
     });
 
+    newHubConnection.on("UpdateMoney", (groupMoney: number) => {
+      setMoney(groupMoney);
+    });
+
     newHubConnection.on("UpdateNbPizzasAndMoney", (pizzas: number, groupMoney: number) => {
       setNbPizzas(pizzas);
       setMoney(groupMoney);
@@ -55,6 +59,7 @@ export default function Home() {
   }
 
   function addMoney() {
+    hubConnection?.invoke("AddMoney", selectedChoice);
   }
 
   function buyPizza() {
