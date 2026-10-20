@@ -30,16 +30,27 @@ export default function Home() {
       setUserCount(nbUsers);
     });
 
+    newHubConnection.on("UpdatePizzaPrice", (price: number) => {
+      setPizzaPrice(price);
+    });
+
+    newHubConnection.on("UpdateNbPizzasAndMoney", (pizzas: number, groupMoney: number) => {
+      setNbPizzas(pizzas);
+      setMoney(groupMoney);
+    });
+
     await newHubConnection.start();
     setHubConnection(newHubConnection);
     setIsConnected(true);
   }
 
-  function selectChoice(selectedChoice:number) {
+  async function selectChoice(selectedChoice:number) {
+    await hubConnection?.invoke("SelectChoice", selectedChoice);
     setSelectedChoice(selectedChoice);
   }
 
-  function unselectChoice() {
+  async function unselectChoice() {
+    await hubConnection?.invoke("UnselectChoice", selectedChoice);
     setSelectedChoice(-1);
   }
 
