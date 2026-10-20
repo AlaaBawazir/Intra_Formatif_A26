@@ -21,12 +21,17 @@ export default function Home() {
       connectToHub();
     }, []);
 
-  function connectToHub() {
+  async function connectToHub() {
     let newHubConnection = new HubConnectionBuilder()
     .withUrl('http://localhost:5282/hubs/pizza')
     .build();
 
-    // TODO: Mettre isConnected à true seulement une fois que la connection au Hub est faite
+    newHubConnection.on("UpdateNbUsers", (nbUsers: number) => {
+      setUserCount(nbUsers);
+    });
+
+    await newHubConnection.start();
+    setHubConnection(newHubConnection);
     setIsConnected(true);
   }
 
