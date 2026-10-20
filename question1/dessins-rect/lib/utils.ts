@@ -6,13 +6,18 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function createSquare(x: number, y: number, color: string){
-  return { type: 'rect', props: { x: 100 * x, y: 100 * y, width: 100, height: 100, fill: color } };
+  return { type: 'rect' as const, props: { x: 100 * x, y: 100 * y, width: 100, height: 100, fill: color } };
 }
 
 export function createCircle(x: number, y: number, color: string){
-  return { type: 'circle', props: { x: 100 * x + 50, y: 100 * y + 50, radius: 50, fill: color } };
+  return { type: 'circle' as const, props: { x: 100 * x + 50, y: 100 * y + 50, radius: 50, fill: color } };
 }
 
 export function createStar(x: number, y: number, innerRadius:number, color: string){
-  return { type: 'star', props: { x: 100 * x + 50, y: 100 * y + 50, innerRadius: innerRadius, outerRadius: 50, fill: color } };
+  return { type: 'star' as const, props: { x: 100 * x + 50, y: 100 * y + 50, numPoints: 5, innerRadius: innerRadius, outerRadius: 50, fill: color } };
 }
+
+export type Shape =
+  | { type: 'rect'; props: { x: number; y: number; width: number; height: number; fill: string } }
+  | { type: 'circle'; props: { x: number; y: number; radius: number; fill: string } }
+  | { type: 'star'; props: { x: number; y: number; numPoints: number; innerRadius: number; outerRadius: number; fill: string } };

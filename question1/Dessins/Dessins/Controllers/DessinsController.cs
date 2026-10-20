@@ -16,18 +16,22 @@ namespace Dessins.Controllers
             return Ok(drawSquare);
         }
 
-        // TODO: Il faut ajouter une nouvelle action pour dessiner la séquence mentionnée dans l'énoncé
         [HttpGet]
-        public async Task<ActionResult> GetDrawing2()
+        public ActionResult GetDrawing2()
         {
-            var drawEvent = new List<DrawingEvent> { };
-            drawEvent.Add(new DrawCircle(1, 1));
-            drawEvent.Add(new Wait(3));
-            drawEvent.Add(new DrawSquare(0, 2));
-            drawEvent.Add(new DrawSquare(2, 2));
-            drawEvent.Add(new Wait(1));
-            drawEvent.Add(new DrawStar(1, 3, 20));
-            return Ok();
+            var drawEvent = new List<DrawingEvent>
+            {
+                new DrawCircle(1, 1),
+                new Wait(3),
+                new ChangeColor("red"),
+                new DrawSquare(0, 2),
+                new DrawSquare(2, 2),
+                new Wait(1),
+                new ChangeColor("yellow"),
+                new DrawStar(1, 3, 20)
+            };
+
+            return Ok(drawEvent);
         }
     }
 }

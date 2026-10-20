@@ -2,8 +2,9 @@
 
 import { Stage, Layer } from 'react-konva';
 import { Rect, Circle, Star } from 'react-konva';
+import type { Shape } from '@/lib/utils';
 
-export default function Canvas({ shapes }: { shapes: any[] }) {
+export default function Canvas({ shapes }: { shapes: Shape[] }) {
   return (
     <div className='m-4'>
       <Stage width={800} height={800} >
